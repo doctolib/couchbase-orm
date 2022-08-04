@@ -23,8 +23,8 @@ require 'couchbase-orm/base'
 module Rails #:nodoc:
     module Couchbase #:nodoc:
         class Railtie < Rails::Railtie #:nodoc:
-            config.couchbase2 = ActiveSupport::OrderedOptions.new
-            config.couchbase2.ensure_design_documents = true
+            config.couchbase_orm = ActiveSupport::OrderedOptions.new
+            config.couchbase_orm.ensure_design_documents = true
 
             # Maping of rescued exceptions to HTTP responses
             #
@@ -78,7 +78,7 @@ module Rails #:nodoc:
 
             # Check (and upgrade if needed) all design documents
             config.after_initialize do |app|
-                if config.couchbase2.ensure_design_documents
+                if config.couchbase_orm.ensure_design_documents
                     begin
                         ::CouchbaseOrm::Base.descendants.each do |model|
                             model.ensure_design_document!
