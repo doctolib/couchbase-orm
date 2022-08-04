@@ -48,7 +48,7 @@ module Rails #:nodoc:
             initializer 'couchbase.setup_connection' do
                 ENV['COUCHBASE_BUCKET'] ||= Rails.application.config_for(:couchbase).bucket
                 ENV['COUCHBASE_CONNECTION_STRING'] ||= Rails.application.config_for(:couchbase).connection_string
-                ENV['COUCHBASE_USERNAME'] ||= Rails.application.config_for(:couchbase).username
+                ENV['COUCHBASE_USER'] ||= Rails.application.config_for(:couchbase).username
                 ENV['COUCHBASE_PASSWORD'] ||= Rails.application.config_for(:couchbase).password
             end
 

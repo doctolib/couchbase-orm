@@ -7,7 +7,7 @@
 You can configure couchbase-orm by setting folloing environnment variables
 - COUCHBASE_CONNECTION_TRING=couchbase://127.0.0.1
 - COUCHBASE_BUCKET=my-dev-bucket
-- COUCHBASE_USERNAME=couchbase-user
+- COUCHBASE_USER=couchbase-user
 - COUCHBASE_PASSWORD=couchbase-password
 
 ## Rails integration
