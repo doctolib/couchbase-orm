@@ -3,21 +3,12 @@ require 'couchbase'
 
 module CouchbaseOrm
     class Connection
-        @options = {}
-        class << self
-            attr_accessor :options
-        end
-
         def self.cluster
-            @cluster ||= begin
-                options = Couchbase::Cluster::ClusterOptions.new
-                options.authenticate(ENV["COUCHBASE_USER"], ENV["COUCHBASE_PASSWORD"])
-                Couchbase::Cluster.connect('couchbase://127.0.0.1', options)
-            end
+            @cluster ||= Couchbase::Cluster.connect(Rails.application.config.couchbase)
         end
 
         def self.bucket
-            @bucket ||= cluster.bucket(ENV["COUCHBASE_BUCKET"])
+            @bucket ||= cluster.bucket(Rails.application.config.couchbase_orm.bucket)
         end
     end
 end
