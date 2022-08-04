@@ -2,7 +2,17 @@
 
 [![Build Status](https://secure.travis-ci.org/acaprojects/couchbase-orm.svg)](http://travis-ci.org/acaprojects/couchbase-orm)
 
+## Configuration
+
+You can configure couchbase-orm by setting folloing environnment variables
+- COUCHBASE_CONNECTION_TRING=couchbase://127.0.0.1
+- COUCHBASE_BUCKET=my-dev-bucket
+- COUCHBASE_USERNAME=couchbase-user
+- COUCHBASE_PASSWORD=couchbase-password
+
 ## Rails integration
+
+If used in a Rails application, you also may configure couchbase-orm with a YAML config file.
 
 To generate config you can use `rails generate couchbase_orm:config`:
 
@@ -12,7 +22,7 @@ To generate config you can use `rails generate couchbase_orm:config`:
 It will generate this `config/couchbase.yml` for you:
 
     common: &common
-      hosts: localhost
+      connection_string: couchbase://localhost
       username: dev_user
       password: dev_password
 
@@ -26,7 +36,7 @@ It will generate this `config/couchbase.yml` for you:
 
     # set these environment variables on your production server
     production:
-    hosts: <%= ENV['COUCHBASE_HOST'] || ENV['COUCHBASE_HOSTS'] %>
+    hosts: <%= ENV['COUCHBASE_CONNECTION_STRING'] %>
     bucket: <%= ENV['COUCHBASE_BUCKET'] %>
     username: <%= ENV['COUCHBASE_USER'] %>
     password: <%= ENV['COUCHBASE_PASSWORD'] %>

@@ -46,7 +46,10 @@ module Rails #:nodoc:
             # Initialize Couchbase Mode. This will look for a couchbase.yml in the
             # config directory and configure Couchbase connection appropriately.
             initializer 'couchbase.setup_connection' do
-                config.couchbase_orm.bucket = Rails.application.config_for(:couchbase).bucket
+                ENV['COUCHBASE_BUCKET'] ||= Rails.application.config_for(:couchbase).bucket
+                ENV['COUCHBASE_CONNECTION_STRING'] ||= Rails.application.config_for(:couchbase).connection_string
+                ENV['COUCHBASE_USERNAME'] ||= Rails.application.config_for(:couchbase).username
+                ENV['COUCHBASE_PASSWORD'] ||= Rails.application.config_for(:couchbase).password
             end
 
             # After initialization we will warn the user if we can't find a couchbase.yml and
