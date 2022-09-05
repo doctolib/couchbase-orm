@@ -43,15 +43,6 @@ module Rails #:nodoc:
                 config.action_dispatch.rescue_responses.merge!(rescue_responses)
             end
 
-            # Initialize Couchbase Mode. This will look for a couchbase.yml in the
-            # config directory and configure Couchbase connection appropriately.
-            initializer 'couchbase.setup_connection' do
-                ENV['COUCHBASE_BUCKET'] ||= Rails.application.config_for(:couchbase).bucket
-                ENV['COUCHBASE_CONNECTION_STRING'] ||= Rails.application.config_for(:couchbase).connection_string
-                ENV['COUCHBASE_USER'] ||= Rails.application.config_for(:couchbase).username
-                ENV['COUCHBASE_PASSWORD'] ||= Rails.application.config_for(:couchbase).password
-            end
-
             # After initialization we will warn the user if we can't find a couchbase.yml and
             # alert to create one.
             initializer 'couchbase.warn_configuration_missing' do
