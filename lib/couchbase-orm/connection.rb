@@ -3,20 +3,30 @@ require 'couchbase'
 
 module CouchbaseOrm
     class Connection
-        def self.cluster(config = nil)
-            # use the config loaded by couchbase gem railtie from config/couchbase.yml
-            config ||= Rails.configuration.couchbase if defined?(::Rails)
-            raise 'Missing Couchbase configuration' unless config
 
-            @cluster ||= Couchbase::Cluster.connect(config)
+        def self.config
+            @@config || raise('Missing CouchbaseOrm connection config')
         end
 
-        def self.bucket(name = nil)
-            # use the bucket name from config/couchbase.yml
-            name ||= Rails.application.config_for(:couchbase).bucket if defined?(::Rails)
-            raise 'Missing bucket name' unless name
+        def self.config=(config)
+            @@config = config
+        end
 
-            @bucket ||= cluster.bucket(name)
+        def self.cluster
+            @cluster ||= begin
+                cb_config = Couchbase::Configuration.new
+                cb_config.connection_string = config[:connection_string] || raise('Missing CouchbaseOrm connection string')
+                cb_config.username = config[:username] || raise('Missing CouchbaseOrm username')
+                cb_config.password = config[:password] || raise('Missing CouchbaseOrm password')
+                Couchbase::Cluster.connect(cb_config)
+            end
+        end
+
+        def self.bucket
+            @bucket ||= begin
+                bucket_name = config[:bucket] || raise('Missing CouchbaseOrm bucket name')
+                cluster.bucket(bucket_name)
+            end
         end
     end
 end

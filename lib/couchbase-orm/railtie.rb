@@ -43,6 +43,9 @@ module Rails #:nodoc:
                 config.action_dispatch.rescue_responses.merge!(rescue_responses)
             end
 
+            initializer 'couchbase_orm.setup_connection_config' do
+                CouchbaseOrm::Connection.config = Rails.application.config_for(:couchbase)
+            end
             # After initialization we will warn the user if we can't find a couchbase.yml and
             # alert to create one.
             initializer 'couchbase.warn_configuration_missing' do
