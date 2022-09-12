@@ -23,8 +23,8 @@ require 'couchbase-orm/base'
 module Rails #:nodoc:
     module Couchbase #:nodoc:
         class Railtie < Rails::Railtie #:nodoc:
-            config.couchbase_orm = ActiveSupport::OrderedOptions.new
-            config.couchbase_orm.ensure_design_documents = true
+            config.couchbase2 = ActiveSupport::OrderedOptions.new
+            config.couchbase2.ensure_design_documents = true
 
             # Maping of rescued exceptions to HTTP responses
             #
@@ -46,10 +46,11 @@ module Rails #:nodoc:
             # Initialize Couchbase Mode. This will look for a couchbase.yml in the
             # config directory and configure Couchbase connection appropriately.
             initializer 'couchbase.setup_connection' do
-                ENV['COUCHBASE_BUCKET'] ||= Rails.application.config_for(:couchbase).bucket
-                ENV['COUCHBASE_CONNECTION_STRING'] ||= Rails.application.config_for(:couchbase).connection_string
-                ENV['COUCHBASE_USER'] ||= Rails.application.config_for(:couchbase).username
-                ENV['COUCHBASE_PASSWORD'] ||= Rails.application.config_for(:couchbase).password
+                config_file = Rails.root.join('config', 'couchbase.yml')
+                if config_file.file? &&
+                    config = YAML.load(ERB.new(File.read(config_file)).result)[Rails.env]
+                    ::CouchbaseOrm::Connection.options = config.deep_symbolize_keys
+                end
             end
 
             # After initialization we will warn the user if we can't find a couchbase.yml and
@@ -77,7 +78,7 @@ module Rails #:nodoc:
 
             # Check (and upgrade if needed) all design documents
             config.after_initialize do |app|
-                if config.couchbase_orm.ensure_design_documents
+                if config.couchbase2.ensure_design_documents
                     begin
                         ::CouchbaseOrm::Base.descendants.each do |model|
                             model.ensure_design_document!

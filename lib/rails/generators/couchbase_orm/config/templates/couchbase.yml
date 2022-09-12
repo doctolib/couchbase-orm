@@ -1,6 +1,5 @@
 common: &common
-  connection_string: couchbase://localhost
-  bucket: <%= bucket_name || app_name %>
+  hosts: localhost
   username: <%= username || bucket_name || app_name %>
   password: <%= password %>
 
@@ -14,7 +13,7 @@ test:
 
 # set these environment variables on your production server
 production:
-  connection_string: <%%= ENV['COUCHBASE_CONNECTION_STRING'] %>
+  hosts: <%%= ENV['COUCHBASE_HOST'] || ENV['COUCHBASE_HOSTS'] %>
   bucket: <%%= ENV['COUCHBASE_BUCKET'] %>
   username: <%%= ENV['COUCHBASE_USER'] %>
   password: <%%= ENV['COUCHBASE_PASSWORD'] %>
