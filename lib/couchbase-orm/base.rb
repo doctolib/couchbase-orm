@@ -97,14 +97,6 @@ module CouchbaseOrm
                 end
             end
 
-            def column_names
-                @attributes.map { |col| col[0].to_s }
-            end
-
-            def attribute_names
-                @attributes.map { |col| col[0].to_s }
-            end
-
             def attributes
                 @attributes ||= {}
             end
