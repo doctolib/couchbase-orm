@@ -24,7 +24,7 @@ jobs:
             gemfile: '7.0.0'
             couchbase: '7.1.0'
       fail-fast: false
-    runs-on: ubuntu-20.04
+    runs-on: prod-linux-s
     name: ${{ matrix.ruby }} rails-${{ matrix.gemfile }}  couchbase-${{ matrix.couchbase }}
     steps:
     - uses: actions/checkout@v3
