@@ -1,3 +1,9 @@
+# THIS REPO has been moved to [https://doctolib.atlassian.net/servicedesk/customer/portal/52/PES-839
+](https://github.com/Couchbase-Ecosystem/couchbase-ruby-orm)
+
+
+-----
+
 # Couchbase ORM for Rails
 
 [![Build Status](https://secure.travis-ci.org/acaprojects/couchbase-orm.svg)](http://travis-ci.org/acaprojects/couchbase-orm)
