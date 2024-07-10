@@ -1,5 +1,4 @@
-# THIS REPO has been moved to [https://doctolib.atlassian.net/servicedesk/customer/portal/52/PES-839
-](https://github.com/Couchbase-Ecosystem/couchbase-ruby-orm)
+# THIS REPO has been moved to [https://github.com/Couchbase-Ecosystem/couchbase-ruby-orm](https://github.com/Couchbase-Ecosystem/couchbase-ruby-orm)
 
 
 -----
