@@ -1,3 +1,8 @@
+# THIS REPO has been moved to [https://github.com/Couchbase-Ecosystem/couchbase-ruby-orm](https://github.com/Couchbase-Ecosystem/couchbase-ruby-orm)
+
+
+-----
+
 # Couchbase ORM for Rails
 
 [![Build Status](https://secure.travis-ci.org/acaprojects/couchbase-orm.svg)](http://travis-ci.org/acaprojects/couchbase-orm)
